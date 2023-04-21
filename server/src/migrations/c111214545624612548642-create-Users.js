@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      password: {
+      passwordHash: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -31,8 +31,6 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: 'anon.png',
       },
       role: {
         type: Sequelize.ENUM('customer', 'creator'),
@@ -43,15 +41,19 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      accessToken: {
-        type: Sequelize.TEXT,
-        allowNull: true,
-      },
       rating: {
         type: Sequelize.FLOAT,
         allowNull: false,
         defaultValue: 0,
       },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      }
     })
       .then(() => queryInterface.addConstraint('Users',  {
         type: 'check',

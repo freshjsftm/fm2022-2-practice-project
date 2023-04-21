@@ -1,9 +1,9 @@
 module.exports = (err, req, res, next) => {
   console.log(err);
   if (err.message ===
-    'new row for relation "Banks" violates check constraint "Banks_balance_ck"' ||
+    'new row for relation "Bank" violates check constraint "Bank_balance_ck"' ||
     err.message ===
-    'new row for relation "Users" violates check constraint "Users_balance_ck"') {
+    'new row for relation "User" violates check constraint "User_balance_ck"') {
     err.message = 'Not Enough money';
     err.code = 406;
   }

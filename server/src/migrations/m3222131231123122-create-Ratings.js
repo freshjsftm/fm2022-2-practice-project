@@ -29,6 +29,14 @@ module.exports = {
           max: 5,
         },
       },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      }
     });
   },
   down: (queryInterface, Sequelize) => {

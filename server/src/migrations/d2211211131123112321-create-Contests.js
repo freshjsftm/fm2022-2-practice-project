@@ -64,11 +64,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DECIMAL,
       },
-      createdAt: {
-        allowNull: true,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
-      },
       priority: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -85,6 +80,14 @@ module.exports = {
           key: 'id',
         },
       },
+      createdAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        defaultValue: new Date()
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
