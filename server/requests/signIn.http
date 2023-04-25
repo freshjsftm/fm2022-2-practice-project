@@ -1,0 +1,7 @@
+POST http://172.18.0.4:3000/auth/sign-in HTTP/1.1
+Content-Type: application/json
+
+{
+  "password": "123123",
+  "email": "Brad@gmail.com"
+}

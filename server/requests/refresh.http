@@ -1,0 +1,6 @@
+POST http://172.18.0.4:3000/auth/refresh HTTP/1.1
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiQnJhZEBnbWFpbC5jb20iLCJyb2xlIjoiY3VzdG9tZXIiLCJpYXQiOjE2ODI0MDY1NzksImV4cCI6MTY4NDk5ODU3OX0.EVyC1efK9SpwaAXm-1a9JQjUpwRg7yKK54Lx4iNaqzw"
+}
