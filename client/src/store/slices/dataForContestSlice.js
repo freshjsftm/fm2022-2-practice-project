@@ -14,6 +14,7 @@ export const getDataForContest = decorateAsyncThunk({
   key: `${DATA_FOR_CONTEST_SLICE_NAME}/getDataForContest`,
   thunk: async payload => {
     const { data } = await restController.dataForContest(payload);
+    console.log(data)
     return data;
   },
 });

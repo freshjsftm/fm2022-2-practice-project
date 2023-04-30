@@ -16,7 +16,8 @@ export const getUser = createAsyncThunk(
   `${USER_SLICE_NAME}/getUser`,
   async (replace, { rejectWithValue }) => {
     try {
-      const { data } = await restController.getUser();
+      //дістаємо з { data:{data} }
+      const { data:{data} } = await restController.getUser();
       controller.subscribe(data.id);
       if (replace) {
         replace('/');

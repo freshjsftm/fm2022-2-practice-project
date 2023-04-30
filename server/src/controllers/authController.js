@@ -14,7 +14,7 @@ module.exports.signIn = async (req, res, next) => {
     });
     if (user && (await user.comparePassword(password))) {
       const data = await AuthServices.createSession(user);
-      res.status(200).send({ data });
+      return res.status(200).send({ data });
     }
     next(createHttpError(401, 'Invalid credentials!'));
   } catch (error) {
@@ -26,9 +26,10 @@ module.exports.signUp = async (req, res, next) => {
   try {
     const { body } = req;
     const user = await User.create(body);
+    console.log('=====>>>>>>>', user)
     if (user) {
       const data = await AuthServices.createSession(user);
-      res.status(201).send({ data });
+      return res.status(201).send({ data });
     }
     next(createHttpError(400, 'Bad request!'));
   } catch (error) {

@@ -4,12 +4,13 @@ const JWTServices = require('../services/jwtServices');
 module.exports.checkAccessToken = async (req, res, next) => {
   try {
     const {
-      headers: { autorization },
+      headers: { authorization },
     } = req;
-    if (autorization) {
-      const [, accessToken] = autorization.split(' ');
+
+    if (authorization) {
+      const [, accessToken] = authorization.split(' ');
       req.tokenData = await JWTServices.verifyAccessToken(accessToken);
-      next();
+      return next();
     }
     next(createError(401, 'Need token'));
   } catch (error) {

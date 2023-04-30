@@ -30,7 +30,7 @@ class Header extends React.Component {
           <div className={styles.userInfo}>
             <img
               src={
-                this.props.data.avatar === 'anon.png'
+                this.props.data.avatar === null
                   ? CONSTANTS.ANONYM_IMAGE_PATH
                   : `${CONSTANTS.publicURL}${this.props.data.avatar}`
               }

@@ -27,7 +27,7 @@ const UserInfo = (props) => {
         <div className={styles.infoContainer}>
           <img
             src={
-              avatar === 'anon.png'
+              avatar === null
                 ? CONSTANTS.ANONYM_IMAGE_PATH
                 : `${CONSTANTS.publicURL}${avatar}`
             }

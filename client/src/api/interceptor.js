@@ -2,39 +2,43 @@ import axios from 'axios';
 import CONTANTS from '../constants';
 import history from '../browserHistory';
 
-const instance = axios.create({
+const http = axios.create({
   baseURL: CONTANTS.BASE_URL,
 });
 
-instance.interceptors.request.use(
+let accessToken = null;
+
+http.interceptors.request.use(
   config => {
-    const token = window.localStorage.getItem(CONTANTS.ACCESS_TOKEN);
-    if (token) {
-      config.headers = { ...config.headers, Authorization: `Bearer ${token}` };
+    if (accessToken) {
+      //console.log('accessToken ===========>>>>>', accessToken)
+      config.headers = { ...config.headers, 'Authorization': `Bearer ${accessToken}` };
     }
     return config;
   },
   err => Promise.reject(err)
 );
 
-instance.interceptors.response.use(
+http.interceptors.response.use(
   response => {
-    if (response.data.token) {
-      window.localStorage.setItem(CONTANTS.ACCESS_TOKEN, response.data.token);
+    if (response && response.data && response.data.data && response.data.data.tokenPair) {
+      const {data:{data:{tokenPair:{access, refresh}}}} = response;
+      window.localStorage.setItem(CONTANTS.REFRESH_TOKEN, refresh);
+      accessToken = access;
     }
     return response;
   },
   err => {
-    if (
-      err.response.status === 408 &&
-      history.location.pathname !== '/login' &&
-      history.location.pathname !== '/registration' &&
-      history.location.pathname !== '/'
-    ) {
-      history.replace('/login');
+    const refreshToken = window.localStorage.getItem(CONTANTS.REFRESH_TOKEN);
+    if(err.response.status === 408 && refreshToken){
+      const {data:{data:{tokenPair:{access, refresh}}}} = http.post('/auth/refresh', {refreshToken});
+      window.localStorage.setItem(CONTANTS.REFRESH_TOKEN, refresh);
+      accessToken = access;
+      err.config.headers.Authorization = `Bearer ${access}`;
+      return axios.request(err.config);
     }
     return Promise.reject(err);
   }
 );
 
-export default instance;
+export default http;

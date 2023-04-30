@@ -1,6 +1,6 @@
 module.exports = {
   ACCESS_TOKEN_SECRET: 'asdasdasd4as5d4as8d7a8sd4as65d4a8sd7asd4as56d4',
-  ACCESS_TOKEN_TIME: '1h',
+  ACCESS_TOKEN_TIME: '10m',
   REFRESH_TOKEN_SECRET: 'asdasdasd4as5d4as8d7a8sd4as65d4a8sd7asd4as56d4',
   REFRESH_TOKEN_TIME: '30d',
   SALT_ROUNDS: 5,
